@@ -181,7 +181,7 @@ VersionQ[n_] := $VersionNumber >= n
 testBytePositions[func_] := If[func[ByteArray[{0,2,1,4}], ByteArray[{1}], {1}] === {{3,3}}, True, False]
 
 bytesPosition := bytesPosition = 
-If[VersionQ[13.2],
+If[VersionQ[15.2],
 		With[{compiled = PreCompile[{$directory, "bytesPosition"}, 
 			{
 				VersionQ[13.2]-> FileNameJoin[{$directory, "Kernel", "bytesPosition.wl"}],
