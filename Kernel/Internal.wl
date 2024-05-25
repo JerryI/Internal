@@ -197,7 +197,7 @@ If[VersionQ[15.2],
 			]
 		]
 ,
-	Print[">> legacy version of WL: using uncompiled version of bytePosition"];
+	
 	FileNameJoin[{$directory, "Kernel", "bytesPosition-uncompiled.wl"}] // Get
 ]
 
