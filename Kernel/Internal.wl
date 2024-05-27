@@ -19,6 +19,9 @@ Cache::usage =
 Cache[expr, period] cache expr for specific period"; 
 
 
+ByteMask::usage =  
+"ByteMask[key, data] returns masked data.";
+
 BytesPosition::usage = 
 "BytesPosition[data, sep, n] n position of sep in data"; 
 
@@ -176,31 +179,13 @@ FileNameJoin[{
 	$SystemID
 }]; 
 
-VersionQ[n_] := $VersionNumber >= n
+bytesPosition := bytesPosition = FileNameJoin[{$directory, "Kernel", "bytesPosition.wl"}] // Get
 
-testBytePositions[func_] := If[func[ByteArray[{0,2,1,4}], ByteArray[{1}], {1}] === {{3,3}}, True, False]
 
-bytesPosition := bytesPosition = 
-If[VersionQ[15.2],
-		With[{compiled = PreCompile[{$directory, "bytesPosition"}, 
-			{
-				VersionQ[13.2]-> FileNameJoin[{$directory, "Kernel", "bytesPosition.wl"}],
-				True -> FileNameJoin[{$directory, "Kernel", "bytesPosition-legacy.wl"}]
-			}]},
+ByteMask[key_ByteArray, data_ByteArray] :=  
+byteMask[data, Length[data], key, Length[key] ]
 
-			If[testBytePositions[compiled] // TrueQ,
-				Print[">> using compiled version of bytePosition"];
-				compiled	
-			,
-				Print[">> test FAILED: using uncompiled version of bytePosition"];
-				FileNameJoin[{$directory, "Kernel", "bytesPosition-uncompiled.wl"}] // Get
-			]
-		]
-,
-	
-	FileNameJoin[{$directory, "Kernel", "bytesPosition-uncompiled.wl"}] // Get
-]
-
+byteMask := byteMask = FileNameJoin[{$directory, "Kernel", "byteMask.wl"}] // Get
 
 (*End private*)
 
