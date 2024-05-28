@@ -1,4 +1,4 @@
-(*Module[{
+Module[{
 	libLoad,
 	module
 },
@@ -41,9 +41,9 @@
 		ClearAll[libLoad];
 		libraryFunction
 	]
-] // Quiet*)
+] // Quiet
 
-With[{c = Compile[{
+(*With[{c = Compile[{
         {maskingKey, _Integer, 1},
         {payload, _Integer, 1}
     }, 
@@ -53,4 +53,4 @@ With[{c = Compile[{
     Function[{key, len1, payload, len2},
         c[payload // Normal, key // Normal]
     ]	
-]
+]*)
